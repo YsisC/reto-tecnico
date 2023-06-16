@@ -16,10 +16,10 @@ export default function Indicadores() {
         codigoIndicador: '',
         fechaIndicador: new Date().toISOString().split('T')[0],
         nombreIndicador: '',
-        origenIndicador: 'mindicador.cl',
+        origenIndicador: '',
         tiempoIndicador: null,
         valorIndicador: 0,
-        unidadMedidaIndicador: 'Pesos'
+        unidadMedidaIndicador: ''
     });
     const {
         codigoIndicador, fechaIndicador,
@@ -30,7 +30,7 @@ export default function Indicadores() {
         unidadMedidaIndicador
     } = formState;
     const [isOpen, setIsOpen] = useState(false);
-    const [items, setItem] = useState([])
+    const [indicadores, setIndicadores] = useState([])
     const [isEdit, setIsEdit] = useState(false);
     const [editingId, setEditingId] = useState(null);
 
@@ -40,7 +40,7 @@ export default function Indicadores() {
 
         try {
             const res = await axios.get(URI);
-            setItem(res.data)
+            setIndicadores(res.data)
         } catch (e) {
             console.log(e)
         }
@@ -105,7 +105,7 @@ export default function Indicadores() {
         setIsEdit(true);
         setEditingId(id);
 
-        const indicadorApi = items.find((item) => item.id === id);
+        const indicadorApi = indicadores.find((item) => item.id === id);
         console.log(indicadorApi)
         setFormState(indicadorApi)
 
@@ -116,7 +116,7 @@ export default function Indicadores() {
         <div className='container'>
             <h1>Indicadores</h1>
             <section>
-               <div className='leftSide'> <Graphic /></div> 
+               <div className='leftSide'> <Graphic indicadores={indicadores}/></div> 
                 <div className='rightSide'> 
                 <h2> Agregar Indices:</h2>
                  <form onSubmit={onFormSubmit} >
@@ -209,7 +209,7 @@ export default function Indicadores() {
                     </tr>
                 </thead>
 
-                {items.map((res) => {
+                {indicadores.map((res) => {
                     return (
                         <React.Fragment key={res.id}>
 
