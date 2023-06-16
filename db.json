@@ -1,36 +1,6 @@
 {
   "indicadores": [
     {
-      "id": 1,
-      "nombreIndicador": "LIBRA DE COBRE",
-      "codigoIndicador": "LIBRA_COBRE",
-      "unidadMedidaIndicador": "Dólar",
-      "valorIndicador": 3.56,
-      "fechaIndicador": "2021-01-04",
-      "tiempoIndicador": null,
-      "origenIndicador": "mindicador.cl"
-    },
-    {
-      "id": 2,
-      "nombreIndicador": "EURO",
-      "codigoIndicador": "EURO",
-      "unidadMedidaIndicador": "Pesos",
-      "valorIndicador": 873.3,
-      "fechaIndicador": "2021-01-04",
-      "tiempoIndicador": null,
-      "origenIndicador": "mindicador.cl"
-    },
-    {
-      "id": 3,
-      "nombreIndicador": "DÓLAR OBSERVADO",
-      "codigoIndicador": "DOLAR",
-      "unidadMedidaIndicador": "Pesos",
-      "valorIndicador": 710.95,
-      "fechaIndicador": "2021-01-04",
-      "tiempoIndicador": null,
-      "origenIndicador": "mindicador.cl"
-    },
-    {
       "id": 4,
       "nombreIndicador": "TASA POLÍTICA MONETARIA (TPM)",
       "codigoIndicador": "TPM",
@@ -43,20 +13,10 @@
     {
       "id": 5,
       "nombreIndicador": "UNIDAD TRIBUTARIA MENSUAL (UTM)",
-      "codigoIndicador": "UTM",
-      "unidadMedidaIndicador": "Pesos",
+      "codigoIndicador": "UTM test",
+      "unidadMedidaIndicador": "Pesos pruebcsasf",
       "valorIndicador": 50978,
       "fechaIndicador": "2020-01-01",
-      "tiempoIndicador": null,
-      "origenIndicador": "mindicador.cl"
-    },
-    {
-      "id": 6,
-      "nombreIndicador": "UNIDAD DE FOMENTO (UF)",
-      "codigoIndicador": "UF",
-      "unidadMedidaIndicador": "Pesos",
-      "valorIndicador": 29061.89,
-      "fechaIndicador": "2021-01-09",
       "tiempoIndicador": null,
       "origenIndicador": "mindicador.cl"
     },
@@ -64,7 +24,7 @@
       "id": 7,
       "nombreIndicador": "UNIDAD DE FOMENTO (UF)",
       "codigoIndicador": "UF",
-      "unidadMedidaIndicador": "Pesos",
+      "unidadMedidaIndicador": "Pesos otras prueba",
       "valorIndicador": 29062.83,
       "fechaIndicador": "2021-01-08",
       "tiempoIndicador": null,
@@ -18979,6 +18939,16 @@
       "valorIndicador": "5.4",
       "unidadMedidaIndicador": "Pesos",
       "id": 1898
+    },
+    {
+      "codigoIndicador": "test",
+      "fechaIndicador": "2023-06-16",
+      "nombreIndicador": "sdas",
+      "origenIndicador": "mindicador.cl",
+      "tiempoIndicador": null,
+      "valorIndicador": "123",
+      "unidadMedidaIndicador": "Pesos",
+      "id": 1899
     }
   ]
 }

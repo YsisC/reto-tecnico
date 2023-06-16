@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useForm } from "../../hooks/useForm"
+import { useForm } from "./hooks/useForm"
 import axios from 'axios'
-// import AddIndicadores from './AddIndicadores';
-import Modal from "./Modal";
+import Modal from "./components/Modal";
 
 export default function Indicadores() {
 
-    const { formState,
+    const {
+        formState,
         onResetForm,
         onInputChange,
-        codigoIndicador,
-        fechaIndicador,
-        nombreIndicador,
-        origenIndicador,
-        tiempoIndicador,
-        valorIndicador,
-        unidadMedidaIndicador,
-    }
-        = useForm({
+        setFormState
+      
+     } = useForm({
             codigoIndicador: '',
             fechaIndicador: new Date().toISOString().split('T')[0],
             nombreIndicador: '',
@@ -26,20 +20,25 @@ export default function Indicadores() {
             valorIndicador: 0,
             unidadMedidaIndicador: 'Pesos'
         });
-
+const {
+    codigoIndicador ,fechaIndicador,
+    nombreIndicador,
+    origenIndicador,
+    tiempoIndicador,
+    valorIndicador,
+    unidadMedidaIndicador
+} = formState;
     const [isOpen, setIsOpen] = useState(false);
     const [items, setItem] = useState([])
     const [isEdit, setIsEdit] = useState(false);
     const [editingId, setEditingId] = useState(null);
-    const [editingIndicador, setEditingIndicador] = useState({});
 
     const URI = 'http://localhost:3000/api/indicadores';
 
     const sendRequest = async () => {
 
         try {
-            const res = await axios.get(URI)
-          
+            const res = await axios.get(URI);
             setItem(res.data)
         } catch (e) {
             console.log(e)
@@ -50,48 +49,38 @@ export default function Indicadores() {
 
     useEffect(() => {
         sendRequest();
-    }, [items])
+    }, [])
 
 
     const onFormSubmit = async (event) => {
         event.preventDefault();
 
-        if (nombreIndicador.length <= 1) return;
-        const indicador = {
-            codigoIndicador,
-            fechaIndicador,
-            nombreIndicador,
-            origenIndicador,
-            tiempoIndicador,
-            valorIndicador,
-            unidadMedidaIndicador
-
-        }
-
+        if (nombreIndicador.length <= 1 && codigoIndicador.length <=1) return;
+        
         try {
             if (!isEdit) {
-                const res = await axios.post(URI, indicador)
+                const res = await axios.post(URI, formState)
                 console.log(res.data)
             } else {
                 await handleUpdate(); //
             }
             onResetForm();
-            // sendRequest();
+            sendRequest();
         } catch (e) {
             alert(e)
         }
-        
+
     };
 
 
     const handleUpdate = async () => {
         try {
 
-            const res = await axios.put(`${URI}/${editingId}`, editingIndicador);
+            const res = await axios.put(`${URI}/${editingId}`, formState);
             console.log(res.data);
             setIsEdit(false);
             setEditingId(null);
-        
+
 
         } catch (error) {
             alert(error);
@@ -115,21 +104,14 @@ export default function Indicadores() {
         setEditingId(id);
 
         const indicadorApi = items.find((item) => item.id === id);
-console.log(indicadorApi) 
-        if (indicadorApi) {
-            onInputChange({ target: { name: 'codigoIndicador', value: indicadorApi.codigoIndicador } });
-            onInputChange({ target: { name: 'fechaIndicador', value: indicadorApi.fechaIndicador } });
-            onInputChange({ target: { name: 'nombreIndicador', value: indicadorApi.nombreIndicador } });
-            onInputChange({ target: { name: 'origenIndicador', value: indicadorApi.origenIndicador } });
-            onInputChange({ target: { name: 'tiempoIndicador', value: indicadorApi.tiempoIndicador } });
-            onInputChange({ target: { name: 'valorIndicador', value: indicadorApi.valorIndicador } });
-            onInputChange({ target: { name: 'unidadMedidaIndicador', value: indicadorApi.unidadMedidaIndicador } });
-        }
+        console.log(indicadorApi)
+        setFormState(indicadorApi)
+
     };
 
     return (
 
-        <div>
+        <div className='container'>
             <h1>Indicadores</h1>
             {/* //           <button className='btn btn-success' onClick={() => setIsOpen(true)}>
     //     Open Modal
@@ -198,8 +180,8 @@ console.log(indicadorApi)
                         type="number"
                         className="form-control"
                         placeholder="Agrega valor Indicador"
-                        name="valorIndicador"
-                        value={valorIndicador}
+                        name={"valorIndicador"}
+                        value={ valorIndicador}
                         onChange={onInputChange}
                     />
                 </div>
@@ -246,7 +228,7 @@ console.log(indicadorApi)
 
                                             </button> */}
                                         <button className='btn btn-success' onClick={() => handleEdit(res.id)} >
-                                          Edit
+                                            Edit
                                         </button>
 
                                         <button className="btn btn-danger mx-3 " onClick={() => onHandleDelete(res.id)}>
