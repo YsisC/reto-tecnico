@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from "./hooks/useForm"
 import axios from 'axios'
 import Modal from "./components/Modal";
+import Graphic from './components/Graphic';
 
 export default function Indicadores() {
 
@@ -10,24 +11,24 @@ export default function Indicadores() {
         onResetForm,
         onInputChange,
         setFormState
-      
-     } = useForm({
-            codigoIndicador: '',
-            fechaIndicador: new Date().toISOString().split('T')[0],
-            nombreIndicador: '',
-            origenIndicador: 'mindicador.cl',
-            tiempoIndicador: null,
-            valorIndicador: 0,
-            unidadMedidaIndicador: 'Pesos'
-        });
-const {
-    codigoIndicador ,fechaIndicador,
-    nombreIndicador,
-    origenIndicador,
-    tiempoIndicador,
-    valorIndicador,
-    unidadMedidaIndicador
-} = formState;
+
+    } = useForm({
+        codigoIndicador: '',
+        fechaIndicador: new Date().toISOString().split('T')[0],
+        nombreIndicador: '',
+        origenIndicador: 'mindicador.cl',
+        tiempoIndicador: null,
+        valorIndicador: 0,
+        unidadMedidaIndicador: 'Pesos'
+    });
+    const {
+        codigoIndicador, fechaIndicador,
+        nombreIndicador,
+        origenIndicador,
+        tiempoIndicador,
+        valorIndicador,
+        unidadMedidaIndicador
+    } = formState;
     const [isOpen, setIsOpen] = useState(false);
     const [items, setItem] = useState([])
     const [isEdit, setIsEdit] = useState(false);
@@ -55,8 +56,8 @@ const {
     const onFormSubmit = async (event) => {
         event.preventDefault();
 
-        if (nombreIndicador.length <= 1 && codigoIndicador.length <=1) return;
-        
+        if (nombreIndicador.length <= 1 && codigoIndicador.length <= 1) return;
+
         try {
             if (!isEdit) {
                 const res = await axios.post(URI, formState)
@@ -98,6 +99,7 @@ const {
 
     const onHandleDelete = (id) => {
         removeIndicador(id);
+
     };
     const handleEdit = (id) => {
         setIsEdit(true);
@@ -113,82 +115,88 @@ const {
 
         <div className='container'>
             <h1>Indicadores</h1>
-            {/* //           <button className='btn btn-success' onClick={() => setIsOpen(true)}>
-    //     Open Modal
-    //   </button>
-    //   {isOpen && <Modal setIsOpen={setIsOpen} />} */}
-            <form onSubmit={onFormSubmit} >
-                <div className="mb-3">
-                    <label className='text-start'>Codigo Indicador</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Agrega codigoIndicador"
-                        name="codigoIndicador"
-                        value={codigoIndicador}
-                        onChange={onInputChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="fechaIndicador" className='text-start'>Fecha de indicador</label>
-                    <input
-                        type="date"
-                        className="form-control"
-                        placeholder="Agrega fechaIndicador"
-                        name="fechaIndicador"
-                        value={fechaIndicador}
-                        onChange={onInputChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="nombreIndicador" className='text-start'>nombre de  Indicador</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Agrega nombre de indicador"
-                        name="nombreIndicador"
-                        value={nombreIndicador}
-                        onChange={onInputChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="origenIndicador" className='text-start'>Origen  Indicador</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Agrega origenIndicador"
-                        name="origenIndicador"
-                        value={origenIndicador}
-                        onChange={onInputChange}
-                    />
-                </div>
+            <section>
+               <div className='leftSide'> <Graphic /></div> 
+                <div className='rightSide'> 
+                <h2> Agregar Indices:</h2>
+                 <form onSubmit={onFormSubmit} >
+                    <div className="mb-3">
+                        <label className='text-start'>Codigo Indicador</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Agrega codigoIndicador"
+                            name="codigoIndicador"
+                            value={codigoIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="fechaIndicador" className='text-start'>Fecha de indicador</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            placeholder="Agrega fechaIndicador"
+                            name="fechaIndicador"
+                            value={fechaIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="nombreIndicador" className='text-start'>nombre de  Indicador</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Agrega nombre de indicador"
+                            name="nombreIndicador"
+                            value={nombreIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="origenIndicador" className='text-start'>Origen  Indicador</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Agrega origenIndicador"
+                            name="origenIndicador"
+                            value={origenIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
 
-                <div className="mb-3">
-                    <label htmlFor="unidadMedidaIndicador" className='text-start'>Unidad de Medida Indicador</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Agrega unidadMedidaIndicador"
-                        name="unidadMedidaIndicador"
-                        value={unidadMedidaIndicador}
-                        onChange={onInputChange}
-                    />
+                    <div className="mb-3">
+                        <label htmlFor="unidadMedidaIndicador" className='text-start'>Unidad de Medida Indicador</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Agrega unidadMedidaIndicador"
+                            name="unidadMedidaIndicador"
+                            value={unidadMedidaIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="fechaIndicador" className='text-start'>Valor Indicador</label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Agrega valor Indicador"
+                            name={"valorIndicador"}
+                            value={valorIndicador}
+                            onChange={onInputChange}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-dark mt-3 mb-4">
+                        {isEdit ? 'Actualizar' : 'Guardar'}
+                    </button>
+                </form>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="fechaIndicador" className='text-start'>Valor Indicador</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Agrega valor Indicador"
-                        name={"valorIndicador"}
-                        value={ valorIndicador}
-                        onChange={onInputChange}
-                    />
-                </div>
-                <button type="submit" className="btn btn-dark mt-3 mb-4">
-                    {isEdit ? 'Actualizar' : 'Guardar'}
-                </button>
-            </form>
+            </section>
+
+       
+               
+            
             <table className="table mt-3 table-hover" >
                 <thead>
                     <tr>
@@ -210,23 +218,10 @@ const {
 
                                     <td>{res.codigoIndicador}</td>
                                     <td>{res.unidadMedidaIndicador}</td>
-
-
                                     <td>{res.fechaIndicador}</td>
-
-
                                     <td>{res.nombreIndicador}</td>
-
-
                                     <td>{res.valorIndicador}</td>
-
-
                                     <td>
-                                        {/* <button 
-                                                className="btn btn-success ">
-                                                edit
-
-                                            </button> */}
                                         <button className='btn btn-success' onClick={() => handleEdit(res.id)} >
                                             Edit
                                         </button>
@@ -237,10 +232,7 @@ const {
                                             </span>
                                         </button>
 
-                                        {isOpen && <Modal key={res.id}
-                                            id={editingId}
-                                            onDelete={removeIndicador}
-                                            setIsOpen={setIsOpen} />}
+
 
                                     </td>
 

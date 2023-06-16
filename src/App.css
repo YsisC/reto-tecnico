@@ -1,8 +1,39 @@
-.container{
+.container {
   width: 100vw;
+ 
   padding: 1rem;
+margin:0.5;
+}
+
+section {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  /* gap: 3rem; */
+}
+
+
+.leftSide {
+  width: 30rem;
+}
+.rightSide{
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 0 2px 0 rgb(114, 114, 114);
+}
+@media (max-width: 600px) {
+  .container{
+    padding: 0.1rem;
+    margin: 0;
+  }
+  section{
+    flex-direction: column;
+  }
+}
+@media (max-width: 860px) {
+  .container{
+    padding: 0.2rem;
+  }
+  section{
+    flex-direction: column;
+  }
 }
